@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/widget_background">
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/appNameTextView"
+    <!-- En-tête -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nom de l'app"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:textColor="#0D47A1"
-        android:paddingBottom="8dp"/>
+        android:orientation="horizontal"
+        android:background="#2196F3"
+        android:padding="10dp">
 
+        <TextView
+            android:id="@+id/appNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mes Notes"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lastUpdateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="À l'instant"
+            android:textColor="#E0FFFFFF"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Contenu de la note -->
     <TextView
         android:id="@+id/noteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Note ici"
-        android:textSize="16sp"
-        android:textColor="#333333"
-        android:gravity="center"
-        android:background="#E3F2FD"
-        android:padding="12dp"
-        android:minHeight="60dp"
+        android:layout_below="@id/headerLayout"
+        android:background="#F5F5F5"
         android:ellipsize="end"
-        android:maxLines="3"/>
+        android:maxLines="4"
+        android:minHeight="80dp"
+        android:padding="16dp"
+        android:text="Votre note apparaîtra ici. Touchez pour modifier."
+        android:textColor="#424242"
+        android:textSize="15sp" />
 
-</LinearLayout>
+</RelativeLayout>

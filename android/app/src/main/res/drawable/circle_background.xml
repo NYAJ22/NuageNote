@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
-    <solid android:color="#2196F3" />
-    <corners android:radius="30dp" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    
+    <!-- Dégradé bleu élégant -->
+    <gradient
+        android:startColor="#2196F3"
+        android:endColor="#3F51B5"
+        android:type="linear"
+        android:angle="135"/>
+    o
+    <!-- Légère élévation visuelle -->
+    <padding
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp"/>
 </shape>
