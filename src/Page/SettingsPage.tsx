@@ -1,25 +1,50 @@
 import React, { useState } from 'react';
-import { View, Text, Switch, TouchableOpacity, Alert } from 'react-native';
-import { styles } from '../styles';
+import {
+  View,
+  Text,
+  Switch,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { styles } from '../styles'; // ou adapte selon ton projet
 
-const SettingsPage = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+const SettingsPage: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    Alert.alert('Thème changé', isDarkMode ? 'Mode clair activé' : 'Mode sombre activé');
+    const newValue = !isDarkMode;
+    setIsDarkMode(newValue);
+    Alert.alert('Thème changé', newValue ? 'Mode sombre activé' : 'Mode clair activé');
+
+    // (optionnel) Sauvegarder le thème
+    // AsyncStorage.setItem('dark_mode', JSON.stringify(newValue));
   };
 
-  const clearAllNotes = () => {
+  const clearAllNotes = async () => {
     Alert.alert(
       'Confirmation',
       'Voulez-vous vraiment supprimer toutes les notes ?',
       [
         { text: 'Annuler', style: 'cancel' },
-        { text: 'Supprimer', style: 'destructive', onPress: () => {
-          // Implémente la suppression réelle ici
-          Alert.alert('Succès', 'Toutes les notes ont été supprimées.');
-        }},
+        {
+          text: 'Supprimer',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await AsyncStorage.clear(); // ou removeItem('notes') si tu as une clé spécifique
+              await AsyncStorage.setItem('last_note', ''); // Vide aussi le widget
+
+              Alert.alert('Succès', 'Toutes les notes ont été supprimées.');
+
+              // (Optionnel) Rafraîchir le widget via un module natif ici
+              // NativeModules.WidgetUpdater.updateWidget();
+            } catch (error) {
+              console.error('Erreur lors de la suppression des notes:', error);
+              Alert.alert('Erreur', 'Impossible de supprimer les notes.');
+            }
+          },
+        },
       ]
     );
   };
